@@ -46,11 +46,11 @@ def multi_menu(request):
 	key_list = sorted(menu_dict)
 	# 空的有序字典
 	ordered_dict = OrderedDict()
-	
+
 	for key in key_list:
 		val = menu_dict[key]
 		val['class'] = 'hide'
-		
+
 		for per in val['children']:
 			if per['id'] == request.current_selected_permission:
 				per['class'] = 'active'
@@ -58,3 +58,8 @@ def multi_menu(request):
 		ordered_dict[key] = val
 
 	return {"menu_dict": ordered_dict, 'request': request}
+
+
+@register.inclusion_tag('rbac/breadcrumb.html')
+def breadcrumb(request):
+	return {'record_list': request.breadcrumb}

@@ -36,14 +36,24 @@ class RbacMiddleware(MiddlewareMixin):
 
 		flag = False
 
+		url_record = [
+			{'title': '首页', 'url': '#'}
+		]
+
 		for item in permission_list:
-			# if current_url == url: BUG
-			# 有权限可以访问
 			reg = "^%s$" % item['url']
 			if re.match(reg, current_url):
 				flag = True
 				request.current_selected_permission = item['pid'] or item['id']
-				print(request)
+				if not item['pid']:
+					url_record.extend([{'title': item['title'], 'url': item['url'], 'class': 'active'}])
+				else:
+					url_record.extend([
+						{'title': item['p_title'], 'url': item['p_url']},
+						{'title': item['title'], 'url': item['url'], 'class': 'active'},
+					])
+				request.breadcrumb = url_record
+
 				break
 
 		if not flag:
