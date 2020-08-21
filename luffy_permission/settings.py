@@ -170,5 +170,4 @@ MENU_SESSION_KEY = "luffy_permission_menu_key"
 VALID_URL_LIST = [
     '/login',
     '/admin/.*',
-    '/',
 ]

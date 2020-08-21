@@ -41,7 +41,6 @@ def multi_menu(request):
 	}
 	"""
 	menu_dict = request.session[settings.MENU_SESSION_KEY]
-	print(request.current_selected_permission)
 
 	# 对字典的key进行排序
 	key_list = sorted(menu_dict)
@@ -53,8 +52,7 @@ def multi_menu(request):
 		val['class'] = 'hide'
 		
 		for per in val['children']:
-			regex = "^%s$" % (per['url'],)
-			if re.match(regex, request.path_info):
+			if per['id'] == request.current_selected_permission:
 				per['class'] = 'active'
 				val['class'] = ''
 		ordered_dict[key] = val
