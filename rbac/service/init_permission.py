@@ -12,7 +12,7 @@ def init_permission(current_user, request):
 	permission_queryset = current_user.roles.filter(permissions__isnull=False).values('permissions__id',
 	                                                                                  'permissions__title',
 	                                                                                  'permissions__url',
-	                                                                                  'permissions__pid_id',
+	                                                                                  'permissions__pid',
 	                                                                                  'permissions__menu_id',
 	                                                                                  'permissions__menu__title',
 	                                                                                  'permissions__menu__icon',
@@ -28,24 +28,24 @@ def init_permission(current_user, request):
 	
 	for item in permission_queryset:
 		permission_list.append(
-			{'id': item['permissions__id'], 'url': item['permissions__url'], 'pid': item['permissions__pid_id']})
+			{'id': item['permissions__id'], 'url': item['permissions__url'], 'pid': item['permissions__pid']})
 		
 		menu_id = item['permissions__menu_id']
 		if not menu_id:
 			continue
-		
+
 		node = {'id': item['permissions__id'], 'title': item['permissions__title'], 'url': item['permissions__url']}
 		
 		if menu_id in menu_dict:
 			menu_dict[menu_id]['children'].append(node)
-		
+
 		else:
 			menu_dict[menu_id] = {
 				'title': item['permissions__menu__title'],
 				'icon': item['permissions__menu__icon'],
 				'children': [node, ]
 			}
-	
+
 	# permission_list = [item['permissions__url'] for item in permission_queryset]
 	
 	# print(menu_dict)

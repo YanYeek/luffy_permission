@@ -40,9 +40,9 @@ def multi_menu(request):
 		}
 	}
 	"""
-	# print(request.current_selected_permission)
 	menu_dict = request.session[settings.MENU_SESSION_KEY]
-	
+	print(request.current_selected_permission)
+
 	# 对字典的key进行排序
 	key_list = sorted(menu_dict)
 	# 空的有序字典
@@ -58,5 +58,5 @@ def multi_menu(request):
 				per['class'] = 'active'
 				val['class'] = ''
 		ordered_dict[key] = val
-	
+
 	return {"menu_dict": ordered_dict, 'request': request}

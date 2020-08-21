@@ -35,6 +35,7 @@ class RbacMiddleware(MiddlewareMixin):
 			return HttpResponse('未获取到用户权限信息，请登录！')
 
 		flag = False
+
 		for item in permission_list:
 			# if current_url == url: BUG
 			# 有权限可以访问
@@ -42,7 +43,7 @@ class RbacMiddleware(MiddlewareMixin):
 			if re.match(reg, current_url):
 				flag = True
 				request.current_selected_permission = item['pid'] or item['id']
-				print(request.current_selected_permission)
+				print(request)
 				break
 
 		if not flag:
