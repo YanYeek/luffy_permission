@@ -30,8 +30,8 @@ class RbacMiddleware(MiddlewareMixin):
 				# 白名单中的url无需权限验证即可访问
 				return None  # 中间件返回None就表示不拦截
 
-		permission_list = request.session.get(settings.PERMISSION_SESSION_KEY)
-		if not permission_list:
+		permission_dict = request.session.get(settings.PERMISSION_SESSION_KEY)
+		if not permission_dict:
 			return HttpResponse('未获取到用户权限信息，请登录！')
 
 		flag = False
@@ -40,7 +40,7 @@ class RbacMiddleware(MiddlewareMixin):
 			{'title': '首页', 'url': '#'}
 		]
 
-		for item in permission_list:
+		for item in permission_dict.values():
 			reg = "^%s$" % item['url']
 			if re.match(reg, current_url):
 				flag = True
