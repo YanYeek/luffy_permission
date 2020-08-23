@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="luffy-container">
+        <div class="alert alert-danger" role="alert">
+            <form method="post">
+                {% csrf_token %}
+                <P style="font-size: 13px;"><i class="fa fa-warning" aria-hidden="true"> 删除后不可恢复，请问是否删除？</i></P>
+
+                <div style="margin-top: 20px;">
+                    <a href="{{ cancel_url }}" class="btn btn-default btn-sm">取消</a>
+                    <button type="submit" class="btn btn-danger btn-sm">确 认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
