@@ -5,6 +5,10 @@
 
 - crm业务
 
+- [学习视频地址](https://www.bilibili.com/video/BV1vz411e7Yr)
+
+- [老师博客](https://www.cnblogs.com/wupeiqi/articles/9178982.html)
+
 	***
 
 ## 步骤：
