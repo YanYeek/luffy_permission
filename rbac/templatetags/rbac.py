@@ -5,6 +5,8 @@ from django.template import Library
 
 from django.conf import settings
 
+from rbac.service import urls
+
 register = Library()
 
 
@@ -75,3 +77,14 @@ def has_permission(request, name):
 	"""
 	if name in request.session[settings.PERMISSION_SESSION_KEY]:
 		return True
+
+
+@register.simple_tag()
+def memory_url(request, name, *args, **kwargs):
+	"""
+	生成带有原搜索条件的URL（替代了模板中的url方法）
+	:param request:
+	:param name:原路径
+	:return:打包原参数为一个整体并返回
+	"""
+	return urls.memory_url(request, name, *args, **kwargs)
