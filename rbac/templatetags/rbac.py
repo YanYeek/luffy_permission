@@ -1,4 +1,3 @@
-import re
 from collections import OrderedDict
 
 from django.template import Library

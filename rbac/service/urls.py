@@ -19,14 +19,14 @@ def memory_url(request, name, *args, **kwargs):
 	"""
 	basic_url = reverse(name, args=args, kwargs=kwargs)
 
+	# 当前url中无参数
 	if not request.GET:
-		# 当前url中无参数
 		return basic_url
 
 	query_dict = QueryDict(mutable=True)
 	query_dict['_filter'] = request.GET.urlencode()  # 拿到参数字符串,并打包参数，用urlencode方法转义成整体
 
-	return "%s?=%s" % (basic_url, query_dict.urlencode())
+	return "%s?%s" % (basic_url, query_dict.urlencode())
 
 
 def memory_reverse(request, name, *args, **kwargs):
